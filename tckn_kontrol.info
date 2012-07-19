@@ -1,0 +1,3 @@
+name=TCKN kontrol
+description=Allows you to verify TCKN (Turkish Republic Identification Number).
+core=7.x

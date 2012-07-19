@@ -1,0 +1,54 @@
+<?php
+
+/*
+ * Implements hook_block_info().
+ */
+
+function tckn_kontrol_block_info() {
+  $block['tckn'] = array(
+    'info' => t('TCKN'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $block;
+}
+
+/*
+ * Implements hook_block_view().
+ */
+
+function tckn_kontrol_block_view($delta = '') {
+  switch ($delta) {
+    case 'tckn':
+      $block['subject'] = t('TCKN check');
+      $block['content'] = drupal_get_form('tckn_kontrol_form');
+  }
+  return $block;
+}
+
+/*
+ * Implements hook_form().
+ */
+
+function tckn_kontrol_form($form, &$form_state) {
+  $form['tckn'] = array(
+    '#type' => 'textfield',
+    '#description' => t('Enter your TCKN.'),
+    '#size' => 11,
+    '#maxlength' => 11,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#validate' => array('tckn_kontrol_form_validate'),
+  );
+  return $form;
+}
+
+/*
+ * Implements hook_form_validate().
+ */
+
+function tckn_kontrol_form_validate($form, &$form_state) {
+  dpm($form_state['values']);
+  dpm($form_state['values']['tckn']);
+}
